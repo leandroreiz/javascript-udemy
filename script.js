@@ -76,7 +76,6 @@ console.log(isFullAge);
 /***************************************
  * CODING CHALLENGE #1
 
-
 Mark and John are trying to compare their BMI (Body Mass Index), which is calculated using the formula:
 BMI = mass / height^2 = mass / (height * height).
 (mass in kg and height in meter).
@@ -307,7 +306,6 @@ console.log(whatDoYouDo('painter','Mike'));
 
 /******************************************
  * Arrays
- */
 
 //initialize array
 var names = ['John','Jane','Mike'];
@@ -339,26 +337,271 @@ console.log(john.indexOf(51));
 
 var isDesigner = john.indexOf('designer') === -1 ? 'John is NOT a designer' : 'John IS a designer';
 console.log(isDesigner);
+*/
+/*******************************************
+ * CODING CHALLENGE #3
 
+ John and his family wen on a holiday and went to 3 different restaurants.
+ The bills were $124, $48 and $268.
 
+ To tip the waiter a fair amount, John created a simple tip calculator
+ (as a function). He likes to tip 20% of the bill when the bill is
+ less than $50, 15% when the bill is between $50 and $200, and 10%
+ when the bill is more than $200.
 
+ In the end, John would like to have 2 arrays:
+ 1) Containing all three tips (one for each bill)
+ 2) Containing all three final paid amounts (bill + tip)
 
+bill1 = 124;
+bill2 = 48;
+bill3 = 268;
 
+function tipCalculator(bill){
+    var tip;
+    if (bill < 50) {
+        tip = bill * 0.2;
+    } else if (bill >= 50 && bill <= 200) {
+        tip = bill * 0.15;
+    } else {
+        tip = bill * 0.10;
+    }
+    return tip;
+}
+//1
+var arrayTips = []; //declaring the array
+arrayTips[arrayTips.length] = tipCalculator(bill1);
+arrayTips[arrayTips.length] = tipCalculator(bill2);
+arrayTips[arrayTips.length] = tipCalculator(bill3); 
+//2
+var arrayBillValue = [];
+arrayBillValue[arrayBillValue.length] = bill1 + tipCalculator(bill1);
+arrayBillValue[arrayBillValue.length] = bill2 + tipCalculator(bill2);
+arrayBillValue[arrayBillValue.length] = bill3 + tipCalculator(bill3);
 
+console.log(arrayTips, arrayBillValue);
+*/
+/*************************************
+ * Objects and properties
 
+//Object literal
+var john = {
+    firstName: 'John',
+    lastName: 'Smith',
+    birthYear: 1990,
+    family: ['Jane','Mark','Bob','Emily'],
+    job: 'teacher',
+    isMarried: 'false'
+}
 
+console.log(john.firstName);
+console.log(john['lastName']);
+var x = 'birthYear';
+console.log(john[x]);
 
+john.job = 'designer';
+john['isMarried'] = true;
+console.log(john);
 
+//new Object syntax
+var jane = new Object();
+jane.firstName = 'Jane';
+jane.lastName = 'Smith';
+jane.birthYear = 1969;
+console.log(jane);
+*/
+/*********************************
+ * Objects and Methods
 
+var john = {
+    firstName: 'John',
+    lastName: 'Smith',
+    birthYear: 1983,
+    family: ['Jane','Mark','Bob','Emily'],
+    job: 'teacher',
+    isMarried: 'false',
+    calcAge: function() {
+        this.age = 2019 - this.birthYear;
+    }
+};
 
+john.calcAge();
+console.log(john);
 
+/***************************************
+ * CODING CHALLENGE #4
 
+Let's remember the first coding challenge... 
 
+1. For each of them, create an object with their full name, mass and height.
+2. Then, add a method to each object to calculate the BMI. Save the BMI to the
+object and also return it from the method.
+3. In the end, log to the console who has the highest BMI, together with the full
+name and the respective BMI. Don't forget they might have the same BMI.
 
+//creating the objects and methods
+var john = {
+    fullName: 'John Smith',
+    mass: 95,
+    height: 1.78,
+    calcBMI: function() {
+        return this.bmi = this.mass / (this.height * this.height);
+    }
+}
+var mark = {
+    fullName: 'Mark Hammil',
+    mass: 88,
+    height: 1.85,
+    calcBMI: function() {
+        return this.bmi = this.mass / (this.height * this.height);
+    }
+}
+//comparing the results and logging the results
+if (john.calcBMI() > mark.calcBMI()) {
+    console.log(john.fullName + ' has the highest BMI with ' + john.bmi + '.');
+} else if (mark.bmi > john.bmi) {
+    console.log(mark.fullName + ' has the highest BMI with ' + mark.bmi + '.');
+} else {
+    console.log('Both have the same BMI!');
+}
+//all the tests were made with success and the challenged was perfectly done!
+*/
+/**********************************
+ * Loops and Iteration
+ 
+//for loop
+ for (var i = 0; i < 10; i++) {
+     console.log(i);
+ }
 
+ for (var i = 1; i < 20; i += 2) {
+    console.log(i);
+}
 
+var john = ['John', 'Smith', 1983, 'designer', false];
 
+for (var i = 0; i < john.length; i++) {
+    console.log(john[i]);
+}
 
+//while loop
+var i = 0;
+while (i < john.length) {
+    console.log(john[i]);
+    i++;
+}
 
+//continue and break statements
+//continue in order to current iteration of the loop and continue with the next one
+//we use break in order to break out of a loop
 
+var john = ['John', 'Smith', 1983, 'designer', false];
 
+for (var i = 0; i < john.length; i++) {
+    if (typeof(john[i]) !== 'string') continue; //will log only strings
+    console.log(john[i]);
+}
+
+for (var i = 0; i < john.length; i++) {
+    if (typeof(john[i]) !== 'string') break; //will log only strings
+    console.log(john[i]);
+}
+
+for (var i = john.length - 1; i >= 0; i--){
+    console.log(john[i]);
+}
+*/
+/********************************************
+ * CODING CHALLENGE #5
+ 
+ Remember the tip calculator challenge? Let's create a more advanced version
+ using everything that we learned! 
+
+ This time, John and his family wen on a holiday and went to 5 different restaurants.
+ The bills were $124, $48, $268, $180 and $42.
+
+ To tip the waiter a fair amount, John created a simple tip calculator
+ (as a function). He likes to tip 20% of the bill when the bill is
+ less than $50, 15% when the bill is between $50 and $200, and 10%
+ when the bill is more than $200.
+
+ Implement a tip calculator using objects and loops:
+ 1. Create an object with an array for the bill values.
+ 2. Add a method to calculate the tip.
+ 3. This method should include a loop to iterate over all the paid bills and do
+ the tip calculations.
+ 4. As an output, create 1) a new array containing all tips, and 2) an array containing
+ final pais amounts (bill + tip). HINT: Start with 2 empty arrays [] as properties
+ and then fill them up in the loop.
+
+ EXTRA AFTER FINISHING:
+ Mark's family went also in a holiday, going to 4 different restaurants. The bills
+ were $77, $375, $110 and $45.
+ Mark likes to tip 20% when the bill is less than $100, 10% when it is
+ between $100 and $300, and 25% if the bill is more than $300.
+
+ 5. Implement the same functionality as before, this time using Mark's tipping rules.
+ 6. Create a function (not a method) to calculate the average of a given array of
+ tips. HINT: Loop over the array, and in each iteration store the current sum in
+ a variable (starting from 0). After you have the sum of the array, divide it by the
+ numbers of elements in it (that's how you calculate the average).
+ 7. Calculate the average tip for each family
+ 8. Log to the console which family paid the highest tips on average
+*/
+
+var john = {
+    bill: [124,48,268,180,42],
+    tip: [],
+    tipPlusBill: [],
+    calcTip: function() {
+        for (var i = 0; i < this.bill.length; i++) {
+            if (this.bill[i] < 50) {
+                this.tip[i] = this.bill[i] * .2;
+            } else if (this.bill[i] >= 50 && this.bill[i] <= 200) {
+                this.tip[i] = this.bill[i] * .15;
+            } else {
+                this.tip[i] = this.bill[i] * .1;
+            }
+            this.tipPlusBill[i] = this.bill[i] + this.tip[i];
+        }   
+    }
+}
+
+var mark = {
+    bill: [77,375,110,45],
+    tip: [],
+    tipPlusBill: [],
+    calcTip: function() {
+        for (var i = 0; i < this.bill.length; i++) {
+            if (this.bill[i] < 100) {
+                this.tip[i] = this.bill[i] * .2;
+            } else if (this.bill[i] >= 100 && this.bill[i] <= 300) {
+                this.tip[i] = this.bill[i] * .1;
+            } else {
+                this.tip[i] = this.bill[i] * .25;
+            }
+            this.tipPlusBill[i] = this.bill[i] + this.tip[i];
+        }   
+    }
+}
+
+function calcAverage(tipArray){
+    var sum = 0;
+    for (i = 0; i < tipArray.length; i++) {
+        sum += tipArray[i];
+    }
+    return sum / tipArray.length;
+}
+
+john.calcTip();
+mark.calcTip();
+john.tipavg = calcAverage(john.tip);
+mark.tipavg = calcAverage(mark.tip);
+
+if (john.tipavg > mark.tipavg) {
+    console.log('John\'s family paid the highest amount of tips with an average value of $' + john.tipavg);
+} else if (john.tipavg < mark.tipavg) {
+    console.log('Mark\'s family paid the highest amount of tips with an average value of $' + mark.tipavg);
+} else {
+    console.log('Both have the same values!');
+}
