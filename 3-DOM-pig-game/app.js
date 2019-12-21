@@ -17,9 +17,8 @@ roundScore = 0;
 activePlayer = 0;
 
 dice = Math.floor(Math.random() * 6) + 1;
-document.querySelector('#current-' + activePlayer).textContent = dice;
-//document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
-//the command above alters the HTML and not only the text like the .textContent
+document.querySelector('#current-' + activePlayer).textContent = dice; //setter
+//var x = document.querySelector('#current-' + activePlayer).textContent; // getter
+//document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>'; //alter the HTML
 
-var x = document.querySelector('#current-0').textContent;
-console.log(x);
+document.querySelector('.dice').style.display = 'none';
