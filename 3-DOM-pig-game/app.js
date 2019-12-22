@@ -17,7 +17,7 @@ one of them is a 1.
 */
 
 //Declaring variables
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, previousRoll;
 
 init();
 
@@ -25,7 +25,7 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
     if (gamePlaying) {
         //Random number
         var dice = Math.floor(Math.random() * 6) + 1;
-        
+
         //Display the result
         var diceDOM = document.querySelector('.dice');
         diceDOM.style.display = 'block';
@@ -37,6 +37,16 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else {
             nextPlayer();    
+        };
+
+        if (previousRoll === 6 && dice === 6) {
+            //Challenge: A player losses his entire score when he rolls two 6 in a row...
+            scores[activePlayer] = 0;
+            document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
+            //After that, it's the next player's turn
+            nextPlayer();
+        } else {
+            previousRoll = dice;
         };
     };    
 });
@@ -66,6 +76,7 @@ function nextPlayer () {
     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
     //Zeroing the roundScore
     roundScore = 0;
+    previousRoll = 0;
     //Zeroing the screen values
     document.getElementById('current-0').textContent = '0';
     document.getElementById('current-1').textContent = '0';
@@ -84,6 +95,7 @@ function init() {
     roundScore = 0;
     activePlayer = 0;
     gamePlaying = true;
+    previousRoll = 0;
 
     document.querySelector('.dice').style.display = 'none';
 
