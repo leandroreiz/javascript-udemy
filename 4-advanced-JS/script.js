@@ -58,7 +58,7 @@ var jane = Object.create(personProto,
         yearOfBirth: {value: 1986},
         job: {value: 'designer'}
     });
-*/
+
 //primitives vs objects
 
 //primitives
@@ -96,27 +96,159 @@ console.log(age,obj.city);
 
 //when we pass a primitive into a function a simple copy is created, so we can alterate its value and it won't be changes outside.
 //when we pass an object, we're passing a reference of where this object is in the memory, so when we change it inside the function we're alterating the object itself.
+*/
+/*
+////////////////////////////////////////
+//Lecture: Passing function as arguments
 
+var years = [1983, 1986, 2003, 1947, 1945];
 
+function arrayCalc (arr,fn) {
+    var resultArray = [];
+    for (var i = 0; i < arr.length; i++) {
+        resultArray.push(fn(arr[i]));
+    }
+    return resultArray;
+}
 
+function calcAge(el) { return 2019 - el; }
 
+function isFullAge(el) { return el >= 18; }
 
+function maxHeartRate(el) {
+    if (el >= 18 && el <= 81 ) {
+        return Math.round(206.9 - (0.67 * el));
+    } else {
+        return -1;
+    }
+}
 
+var ages = arrayCalc(years,calcAge);
+console.log(ages);
 
+var fullAge = arrayCalc(ages, isFullAge);
+console.log(fullAge);
 
+var rates = arrayCalc(ages, maxHeartRate);
+console.log(rates);
+*/
+/*
+////////////////////////////////////////
+//Lecture: Functions returning functions
 
+function interviewQuestion(job) {
+    if (job === 'designer') {
+        return function(name) {
+            console.log(name + ', could you please explain what UX design is?');
+        }
+    } else if (job === 'teacher') {
+        return function(name) {
+            console.log('What subject do you teach, ' + name + '?');
+        }
+    } else {
+        return function(name) {
+            console.log('Hello ' + name + ', what do you do?');
+        }
+    }
+}
 
+var teacherQuestion = interviewQuestion('teacher');
+var designerQuestion = interviewQuestion('designer');
 
+teacherQuestion('John');
+designerQuestion('Jane');
 
+interviewQuestion('driver')('Mark');
+*/
+//////////////////////////////////////////////////////////
+//Lecture: Immediately Invoked Function Expressions (IIFE)
+/*
+function game() {
+    var score = Math.random() * 10;
+    console.log(score >= 5);
+}
 
+game();
 
+(function game() {
+    var score = Math.random() * 10;
+    console.log(score >= 5);
+})();
 
+(function game(lucky) {
+    var score = Math.random() * 10;
+    console.log(score >= 5 - lucky);
+})(5);
+*/
+/*
+////////////////////
+//Lecture: Closures
 
+function retirement (retirementAge) {
+    a = ' years left until retirement.';
+    return function(yearOfBirth) {
+        var age = 2019 - yearOfBirth;
+        console.log((retirementAge - age) + a);
+    }
+}
 
+var timeUntilRetirement = retirement(65)(1983);
+//console.log(timeUntilRetirement);
 
+//Closure: An inner function has always access to the variables and parameters
+//of its outer function, even after the outer function has returned.
 
+function interviewQuestion(job) {
+    return function(name) {
+        if (job === 'teacher') {
+            console.log('What subject do you teach, ' + name + '?');
+        } else if (job === 'designer') {
+            console.log(name + ', could you please explain what UX design is?');
+        } else {
+            console.log('What do you do?');
+        }
+    }
+}
 
+interviewQuestion('designer')('Leandro');
+interviewQuestion('teacher')('Chelem');
+*/
+///////////////////////////////////////////
+//Lecture: BiquadFilterNode, call and apply
 
+var john = {
+    name: 'John',
+    age: 36,
+    job: 'Front-End Developer',
+    presentation: function(style, timeOfDay) {
+        if (style === 'formal') {
+            console.log('Good ' + timeOfDay + ', ladies and gentlemen! I\'m ' + this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age + ' years old.');
+        } else if (style === 'friendly') {
+            console.log('Hey! What\'s up? My name is ' + this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age + ' years old. Have a nice ' + timeOfDay + '.');
+        } else {
+            console.log('');
+        }
+    }
+};
+
+var emily = {
+    name: 'Emily',
+    age: 33,
+    job: 'teacher'
+};
+
+john.presentation('formal','morning');
+john.presentation('friendly','evening');
+
+//call
+john.presentation.call(emily,'formal','afternoon');
+
+//apply
+//john.presentation.apply(emily,['formal','night']);
+
+//bind - returns a function
+var emilyFormal = john.presentation.bind(emily, 'formal');
+emilyFormal('mornin\'');
 
 
 
