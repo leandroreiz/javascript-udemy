@@ -213,6 +213,7 @@ function interviewQuestion(job) {
 interviewQuestion('designer')('Leandro');
 interviewQuestion('teacher')('Chelem');
 */
+/*
 ///////////////////////////////////////////
 //Lecture: BiquadFilterNode, call and apply
 
@@ -249,24 +250,62 @@ john.presentation.call(emily,'formal','afternoon');
 //bind - returns a function
 var emilyFormal = john.presentation.bind(emily, 'formal');
 emilyFormal('mornin\'');
+*/
+///////////////////////////////////////////
+// CHALLENGE #7
+// --- Let's build a fun quiz game in the console ---
+/*
+1. Build a function constructor called Question to describe a question. A question should include:
+a) the question itself
+b) the answers from which the player can choose the correct one (choose an adequate data structure here, array, object, etc)
+c) correct answer (I would use a number for this)*/
+var Question = function (question, answers, correctAnswer) {
+    this.question = question;
+    this.answers = answers;
+    this.correctAnswer = correctAnswer;
+}
 
+//2. Create a couple of question using the constructor
+var questionOne = new Question('What does the fox say?', ['1. Woof', '2. Meow', '3. Ring-ding-ding-ding-dingeringeding!'], 2);
+var questionTwo = new Question('Is JavaScript the funniest programming language ever?', ['1. Yes', '2. No'], 0);
+var questionThree = new Question('Where should I include the link to a .js file?', ['1. You don\'t need to declare that', '2. It\'s usual to inform it at the end of the body section', '3. Inside the head tag'], 1);
 
+//3. Store them all inside an array
+var questionsArray = [questionOne, questionTwo, questionThree];
 
+/*
+4. Select one random question and log it on the console, together with the possible answers (each question should have a number)
+(Hint: write a method for the Question objects for this task)*/
+Question.prototype.randomize = function (arr) {
+    var n = Math.floor(Math.random() * questionsArray.length);
+    
+    console.log(arr[n].question);
+    
+    for (var i = 0; i < arr[n].answers.length; i++) {
+        console.log(arr[n].answers[i]);
+    }
+    return n;
+}
 
+/*
+5. Use the 'prompt' function to ask the user for the correct answer. The user should input the number of the correct answer
+such as you displayed it on task 4.*/
+var questionNumber = questionOne.randomize(questionsArray);
+var userAnswer = prompt('Select the correct answer: ');
 
+/*
+6. Check if the answer is correct and print to the console whether the answer is correct or not
+(Hint: write another method for this)*/
+function checkAnswer(question, answer) {
+    if (questionsArray[question].correctAnswer === answer-1) {
+        console.log('Correct :)');
+    } else {
+        console.log('Wrong :(');
+    };
+}
 
+checkAnswer(questionNumber,userAnswer);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
+7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private
+and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).*/
