@@ -110,7 +110,7 @@ console.log(`${firstName} ${lastName}`.startsWith('J'));
 console.log(`${firstName} ${lastName}`.endsWith('th'));
 console.log(`${firstName} ${lastName}`.includes(' '));
 console.log(`${firstName} `.repeat(3));
-*/
+
 ////////////////////////////
 // Lecture: Arrow functions
 
@@ -204,6 +204,61 @@ Person.prototype.myFriendsES6 = function(friendsArr) {
 };
 
 new Person('Chelem').myFriendsES6(friends);
+
+//////////////////////////
+// Lecture: Destructuring
+
+// ES5
+var john = ['John', 25];
+//var name = john[0];
+//var age = john[1];
+
+// ES6
+const [name, age] = john; //that's the same as = ['John', 25]
+console.log(name, age);
+
+obj = {
+    firstName: 'John',
+    lastName: 'Smith'
+};
+
+//destructing an object
+const {firstName, lastName} = obj;
+console.log(firstName, lastName);
+
+//changing the name of the variables
+const {firstName: a, lastName: b} = obj;
+console.log(a, b);
+
+// ---------------------------------------------------------
+// More practical examples of destructing
+
+function calcAgeRetirement(year) {
+    const age = new Date().getFullYear() - year;
+    return [age, 65 - age];
+};
+
+const [age2, retirement] = calcAgeRetirement(1983);
+console.log(age2, retirement);
+*/
+//////////////////////////////////
+// Lecture: Arrays in ES6/ ES2015
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
