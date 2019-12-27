@@ -388,7 +388,7 @@ function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
 
 var john = new SmithPerson('John', 1983);
 var emily = new SmithPerson('Emily', 1986, 'Diaz', 'spain');
-*/
+
 // ES6
 function SmithPerson(firstName, yearOfBirth, lastName='Smith', nationality='american') {
     
@@ -401,15 +401,49 @@ function SmithPerson(firstName, yearOfBirth, lastName='Smith', nationality='amer
 var john = new SmithPerson('John', 1983);
 var emily = new SmithPerson('Emily', 1986, 'Diaz', 'spain');
 
+/////////////////
+// Lecture: Maps
 
+// how to create a Map
+const question = new Map();
+question.set('question', 'What is the official name of the latest major JavaScript version?');
+question.set(1, 'ES5');
+question.set(2, 'ES6');
+question.set(3, 'ES2015');
+question.set(4, 'ES7');
+question.set('correct', 3);
+question.set(true, 'Correct answer!');
+question.set(false, 'Wrong! Please try again :)');
 
+console.log(question.get('question'));
+//console.log(question.size);
 
+if (question.has(4)) {
+    //question.delete(4);
+}
 
+//question.clear();
 
+//question.forEach((value, key) => console.log(`This is ${key}, and it's set to ${value}`));
 
+for (const [key, value] of question.entries()) {
+    if (typeof(key) === 'number') {
+        console.log(`Answer ${key}: ${value}`);
+    }
+}
 
+const ans = parseInt(prompt('Write the correct answer:'));
 
+console.log(question.get(ans === question.get('correct')));
 
+// Why Maps are so good?
+// 1. We can use anything as keys
+// 2. Because Maps are iterable. Making very easy to loop through them.
+// 3. Really easy to get a size of a Map
+// 4 . Easily add and remove data from a Map
+*/
+/////////////////////
+// Lecture: Classes
 
 
 
