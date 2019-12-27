@@ -240,12 +240,166 @@ function calcAgeRetirement(year) {
 
 const [age2, retirement] = calcAgeRetirement(1983);
 console.log(age2, retirement);
-*/
+
 //////////////////////////////////
 // Lecture: Arrays in ES6/ ES2015
 
+const boxes = document.querySelectorAll('.box');
 
+// ES5
+var boxesArrES5 = Array.prototype.slice.call(boxes);
+console.log(boxesArrES5);
 
+boxesArrES5.forEach(function(element) {
+    element.style.backgroundColor = 'lightgreen';
+});
+
+// ES6
+const boxesArrES6 = Array.from(boxes); (--?--)
+Array.from(boxes).forEach(element => element.style.backgroundColor = 'dodgerblue');
+
+// ---------------------------------------------------------
+// ES5
+for (var i = 0; i < boxesArrES5.length; i++) {
+    if (boxesArrES5[i].className === 'box blue') {
+        continue;
+    } else {
+        boxesArrES5[i].textContent = 'ES5';
+    };
+};
+
+// ES6
+for (const current of boxesArrES6) {
+    if (current.className.includes('blue')) {
+        continue;
+    } else {
+        current.textContent = 'ES6';    
+    }
+}
+
+// ES5
+var ages = [12, 17, 8, 21, 14, 11];
+
+var full = ages.map(function(el) {
+    return el >= 18;
+});
+
+console.log(full);
+console.log(full.indexOf(true)); //searching for the index
+console.log(ages[full.indexOf(true)]); //showing the age
+
+// ES6
+console.log(ages.findIndex(el => el >= 18));
+console.log(ages.find(el => el >= 18));
+
+////////////////////////////
+// Lecture: Spread operator
+// It's used in the function calls
+
+// ES5
+function addFourAges(a, b, c, d) {
+    return a + b + c + d;
+}
+
+var sum1 = addFourAges(18, 30, 12, 21);
+console.log(sum1);
+
+var ages = [18, 30, 12, 21];
+var sum2 = addFourAges.apply(null, ages);
+console.log(sum2);
+
+// ES6
+let sum3 = addFourAges(...ages);
+console.log(sum3);
+
+// -- Another Example --
+const familySmith = ['John', 'Mike', 'Mark'];
+const familyReis = ['Leandro', 'Chelem'];
+const bigFamily = [...familySmith, 'Nina',...familyReis];
+console.log(bigFamily);
+
+const h = document.querySelector('h1');
+const boxes = document.querySelectorAll('.box');
+const all = [h, ...boxes];
+
+//for (const el of all) { el.style.color = 'purple'; }
+Array.from(all).forEach(el => el.style.color = 'blue');
+
+////////////////////////////
+// Lecture: REST parameters
+// It's used in the function declaration
+
+// ES5
+function isFullAgeES5() {
+    
+    var argsArr = Array.prototype.slice.call(arguments);
+    
+    argsArr.forEach(function(el) {
+        console.log((2019 - el) >= 18);
+    });
+}
+
+isFullAgeES5(1983, 2006, 1945, 2010);
+console.log('------------------------------');
+// ES6
+function isFullAgeES6(...years) {
+
+    years.forEach(el => console.log((2019 - el) >= 18));
+
+}
+
+isFullAgeES6(1983, 2006, 1945, 2010);
+
+// ES5
+function isFullAgeES5(limit) {
+    
+    var argsArr = Array.prototype.slice.call(arguments, 1);
+    
+    argsArr.forEach(function(el) {
+        console.log((2019 - el) >= limit);
+    });
+}
+
+isFullAgeES5(21, 1983, 2006, 1945, 2010);
+console.log('------------------------------');
+// ES6
+function isFullAgeES6(limit, ...years) {
+
+    years.forEach(el => console.log((2019 - el) >= limit));
+
+}
+
+isFullAgeES6(21, 1983, 2006, 1945, 2010);
+
+///////////////////////////////
+// Lecture: Default parameters
+
+// ES5
+function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+    
+    lastName === undefined ? lastName = 'Smith' : lastName = lastName;
+    nationality === undefined ? nationality = 'american' : nationality = nationality;
+    
+    this.firstName = firstName;
+    this.yearOfBirth = yearOfBirth;
+    this.lastName = lastName;
+    this.nationality = nationality;
+}
+
+var john = new SmithPerson('John', 1983);
+var emily = new SmithPerson('Emily', 1986, 'Diaz', 'spain');
+*/
+// ES6
+function SmithPerson(firstName, yearOfBirth, lastName='Smith', nationality='american') {
+    
+    this.firstName = firstName;
+    this.yearOfBirth = yearOfBirth;
+    this.lastName = lastName;
+    this.nationality = nationality;
+}
+
+var john = new SmithPerson('John', 1983);
+var emily = new SmithPerson('Emily', 1986, 'Diaz', 'spain');
 
 
 
