@@ -441,22 +441,116 @@ console.log(question.get(ans === question.get('correct')));
 // 2. Because Maps are iterable. Making very easy to loop through them.
 // 3. Really easy to get a size of a Map
 // 4 . Easily add and remove data from a Map
-*/
+
 /////////////////////
 // Lecture: Classes
 
+// ES5
+var PersonES5 = function(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+}
 
+PersonES5.prototype.calcAge = function(year) {
+    var age = new Date().getFullYear - year;
+    console.log(age);
+}
 
+var johnES5 = new PersonES5('John', 1983, 'teacher');
 
+// ES6
+class PersonES6 {
+    constructor (name, yearOfBirth, job) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
 
+    calcAge () {
+        var age = new Date().getFullYear() - this.yearOfBirth;
+        console.log(age);
+    }
 
+    static greetings() {
+        console.log('Hello There!');
+    }
+}
 
+const johnES6 = new PersonES6('John', 1983, 'deigner');
 
+PersonES6.greetings();
 
+//classes are not hoisted, need to be declared first to be used later
+//we can only add methods, not properties
 
+////////////////////////////////////
+// Lecture: Classes with subclasses
 
+// ES5
+var PersonES5 = function(name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+}
 
+PersonES5.prototype.calcAge = function() {
+    var age = new Date().getFullYear() - this.yearOfBirth;
+    console.log(age);
+}
 
+// Subclass in ES5
+var AthleteES5 = function(name, yearOfBirth, job, olympicGames, medals) {
+    PersonES5.call(this, name, yearOfBirth, job);
+    this.olympicGames = olympicGames;
+    this.medals = medals;
+}
 
+// 'Object.create' allows us to manually set the prototype of an object
+AthleteES5.prototype = Object.create(PersonES5.prototype);
 
+AthleteES5.prototype.wonMedal = function() {
+    this.medals++;
+    console.log(this.medals);
+}
 
+var johnAthleteES5 = new AthleteES5('John', 1983, 'Swimmer', 3, 10);
+
+johnAthleteES5.calcAge();
+johnAthleteES5.wonMedal();
+*/
+// ES6
+class PersonES6 {
+    constructor (name, yearOfBirth, job) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+
+    calcAge () {
+        var age = new Date().getFullYear() - this.yearOfBirth;
+        console.log(age);
+    }
+
+    static greetings() {
+        console.log('Hello There!');
+    }
+}
+
+class AthleteES6 extends PersonES6 {
+    constructor (name, yearOfBirth, job, olympicGames, medals) {
+        super(name, yearOfBirth, job);
+        this.olympicGames = olympicGames;
+        this.medals = medals;
+    }
+
+    wonMedal () {
+        this.medals++;
+        console.log(this.medals);
+    }
+}
+
+const johnAthleteES6 = new AthleteES6('John', 1983, 'fighter', 5, 15);
+
+johnAthleteES6.calcAge();
+johnAthleteES6.wonMedal();
