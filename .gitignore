@@ -1,2 +1,2 @@
-# Ignore folder named 'test-ignore'
-8-forkify/dist/test-ignore
+# Ignore folder named 'node-modules'
+8-forkify/node_modules
