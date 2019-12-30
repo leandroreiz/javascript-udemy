@@ -40,5 +40,5 @@ elements.searchForm.addEventListener('submit', e => {
     controlSearch();
 });
 
-const search = new Search('pizza');
-search.getResults();
+
+
