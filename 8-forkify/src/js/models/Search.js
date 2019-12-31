@@ -4,7 +4,7 @@ import axios from 'axios';
 export default class Search {
     constructor(query) {
         this.query = query;
-    }
+    };
     
     async getResults() {
         //using axios to do an AJAX call // it works the same way as 'fetch'
@@ -14,5 +14,5 @@ export default class Search {
         } catch(error) {
             alert(error);
         }
-    }
-}
+    };
+};

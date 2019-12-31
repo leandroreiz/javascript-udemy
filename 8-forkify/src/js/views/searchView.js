@@ -9,6 +9,17 @@ export const clearInput = () => {
 
 export const clearResults = () => {
     elements.searchResultsList.innerHTML = '';
+    elements.searchResultsPages.innerHTML = '';
+};
+
+export const highlightSelected = id => {
+    
+    const resultsArr = Array.from(document.querySelectorAll('.results__link'));
+    resultsArr.forEach(el => {
+        el.classList.remove('results__link--active');
+    });
+
+    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
 };
 
 const limitRecipeTitle = (title, limit = 17) => {
@@ -45,10 +56,10 @@ const renderRecipe = recipe => {
 // type: 'prev' or 'next'
 const createButton = (page, type) => `
     <button class="btn-inline results__btn--${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>
+        <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
         <svg class="search__icon">
             <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'}"></use>
         </svg>
-        <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
     </button>
 `;
 
