@@ -18,7 +18,6 @@ import { elements, renderLoader, clearLoader } from './views/base';
  * - Liked recipes
  */
 const state = {};
-window.state = state;
 
 ////////////////////
 // Search controller
@@ -122,8 +121,6 @@ const controlList = () => {
 
 ////////////////////
 // Likes Controller
-state.likes = new Likes(); // testing
-likesView.toogleLikeMenu(state.likes.getNumLikes()); // testing
 
 const controlLike = () => {
     if (!state.likes) state.likes = new Likes();
@@ -162,6 +159,20 @@ const controlLike = () => {
 
 //////////////////
 // Events Handler
+
+// Restore liked recipes on page load
+window.addEventListener('load', () => {
+    state.likes = new Likes();
+    
+    //Restore likes
+    state.likes.readStorage();
+    
+    // Toogle like menu button
+    likesView.toogleLikeMenu(state.likes.getNumLikes());
+
+    // Render the existing likes
+    state.likes.likes.forEach(like => likesView.renderLikes(like));
+});
 
 // Handling recipe buttons clicks
 elements.recipe.addEventListener('click', e => {
